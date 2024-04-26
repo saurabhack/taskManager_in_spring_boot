@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .task-form {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Task Manager</h1>
+
+    <!-- Task Form -->
+    <div class="task-form">
+        <form id="taskForm" th:action="@{save}"  th:object="${task}" method="post">
+            <div class="form-group">
+                <label for="taskName">Task Name</label>
+                <input type="text" class="form-control" id="taskName" placeholder="Enter task name" required th:field="*{taskName}">
+            </div>
+            <div class="form-group">
+                <label for="taskDescription">Task Description</label>
+                <textarea class="form-control" id="taskDescription" rows="3" placeholder="Enter task description" required th:field="*{description}"></textarea>
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </div>
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- Task List -->
+    <h3>Task List</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Task Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody id="taskList">
+        <!-- Tasks will be dynamically added here -->
+        <tr th:each="taskse : ${tasks}">
+            <td  th:text="${taskse.taskName}"></td>
+            <td th:text="${taskse.description}"></td>
+            <td class="task-actions">
+                <a class="btn btn-success btn-sm" th:href="@{/complete(id=${taskse.id})}">Complete</a>
+                <a class="btn btn-primary btn-sm" th:href="@{/edit(id=${taskse.id})}">Edit</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/complete(id=${taskse.id})}">Delete</a>
+            </td>
+        </tr>
+
+        <!-- You can add more tasks like above -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

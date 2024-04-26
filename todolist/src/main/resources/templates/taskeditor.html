@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container mt-5">
+<div class="task-form">
+    <form id="taskForm" th:action="@{/update(id=${taskse.id})}"  th:object="${taskse}"  method="post" >
+        <div class="form-group">
+            <label for="taskName">Task Name</label>
+            <input type="text" class="form-control" id="taskName" placeholder="Enter task name" required th:field="${taskse.taskName}">
+        </div>
+        <div class="form-group">
+            <label for="taskDescription">Task Description</label>
+            <textarea class="form-control" id="taskDescription" rows="3" placeholder="Enter task description" required th:field="${taskse.description}"></textarea>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Add Task</button>
+        </div>
+    </form>
+</div>
+</div>
+
+
+</body>
+</html>
